@@ -1,0 +1,40 @@
+{
+  "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "actions": {
+          "HTTP": {
+              "inputs": {
+                  "method": "GET",
+                  "uri": "http://azurepraha.com"
+              },
+              "runAfter": {},
+              "type": "Http"
+          },
+          "Response": {
+              "inputs": {
+                  "body": "Moje privatni API rika: @{body('HTTP')}",
+                  "statusCode": 200
+              },
+              "kind": "http",
+              "runAfter": {
+                  "HTTP": [
+                      "Succeeded"
+                  ]
+              },
+              "type": "Response"
+          }
+      },
+      "contentVersion": "1.0.0.0",
+      "outputs": {},
+      "triggers": {
+          "manual": {
+              "inputs": {
+                  "schema": {}
+              },
+              "kind": "Http",
+              "type": "Request"
+          }
+      }
+  },
+  "kind": "Stateless"
+}
